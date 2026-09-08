@@ -1,5 +1,4 @@
 name: Conditional Deploy
-
 on:
   workflow_dispatch:
     inputs:
@@ -19,16 +18,15 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    if: ${{ inputs.environment == 'production' }}
-
     steps:
       - name: Print target
+        if: ${{ inputs.environment == 'production' }}
         run: echo "Deploying $APP_NAME to ${{ inputs.environment }}"
 
       - name: Guarded step
         if: ${{ env.APP_NAME == 'demo-app' }}
-        run: echo "guard passed"
+        run: echo "Guard passed"
 
       - name: Notify
         if: ${{ always() }}
-        run: echo "finished"
+        run: echo "Finished"
