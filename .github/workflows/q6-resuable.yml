@@ -1,4 +1,4 @@
-name: Reusable Workflow
+name: q6-reusable
 
 on:
   workflow_call:
@@ -12,17 +12,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: check repository
-        uses: actions/checkout@v4
-
-      - name: running the greet action
+      - name: Use greeting action
         id: greet
         uses: ./.github/actions/greet
         with:
-          name: GitHub User
-          env_name: ${{ inputs.target_env }}
+          name: ${{ inputs.target_env }}
+          greeting: Hello
 
-      - name: Show greeting
+      - name: Show message
         run: |
-          echo "${{ steps.greet.outputs.greeting }}"
-          echo "Deploying to ${{ inputs.target_env }}... done."
+          echo "Hello ${{ inputs.target_env }}"
+          echo "Deploying to ${{ inputs.target_env }} environment"
