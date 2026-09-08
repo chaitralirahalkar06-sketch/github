@@ -13,8 +13,7 @@ jobs:
     steps:
       - name: Make version
         id: make
-        run: |
-          echo "version=1.0.${GITHUB_RUN_NUMBER}" >> $GITHUB_OUTPUT
+        run: echo "version=1.0.${GITHUB_RUN_NUMBER}" >> "$GITHUB_OUTPUT"
 
   consume:
     needs: generate
@@ -22,8 +21,7 @@ jobs:
 
     steps:
       - name: Use version
-        run: |
-          echo "Version is ${{ needs.generate.outputs.version }}"
+        run: echo "Version is ${{ needs.generate.outputs.version }}"
 
       - name: Fail if empty
         run: |
